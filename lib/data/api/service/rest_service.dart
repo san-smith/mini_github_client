@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:mini_github_client/data/api/service/model/api_user.dart';
 
 class Route {
   static String _getUser(String name) => '/users/$name';
@@ -33,5 +34,12 @@ class RestService {
     } on DioError catch (error) {
       throw Exception(error.response?.data);
     }
+  }
+
+  Future<ApiUser> getUser(String login) async {
+    final response = await _get(
+      Route._getUser(login),
+    );
+    return ApiUser.fromMap(response.data);
   }
 }
