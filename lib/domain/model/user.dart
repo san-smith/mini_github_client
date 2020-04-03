@@ -4,6 +4,8 @@ class User {
   final String name;
   final int publicRepos;
   final String avatarUrl;
+  final String location;
+  final String bio;
 
   User({
     this.id,
@@ -11,5 +13,7 @@ class User {
     this.name,
     this.publicRepos,
     this.avatarUrl,
+    this.location,
+    this.bio,
   });
 }

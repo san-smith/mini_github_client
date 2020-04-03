@@ -8,7 +8,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc(this._userDataRepository);
 
   @override
-  UserState get initialState => null;
+  UserState get initialState => UserInitState();
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
@@ -23,7 +23,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       var user = await _userDataRepository.getUser(login);
       yield UserReadyState(user);
     } catch (e) {
-      yield UserErrorState(e.toString());
+      yield UserErrorState(e.message);
     }
   }
 }
@@ -32,6 +32,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
 abstract class UserState {
 }
+
+class UserInitState extends UserState {}
 
 class UserLoadingState extends UserState {}
 

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:mini_github_client/data/api/service/model/api_user.dart';
+import 'package:mini_github_client/data/api/model/api_user.dart';
 
 class Route {
   static String _getUser(String name) => '/users/$name';
@@ -32,7 +32,7 @@ class RestService {
       final result = await request;
       return result;
     } on DioError catch (error) {
-      throw Exception(error.response?.data);
+      throw Exception(error.response?.data['message']);
     }
   }
 

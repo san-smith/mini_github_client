@@ -1,4 +1,4 @@
-import 'package:mini_github_client/data/api/service/model/api_user.dart';
+import 'package:mini_github_client/data/api/model/api_user.dart';
 import 'package:mini_github_client/domain/model/user.dart';
 
 class UserMapper {
@@ -9,6 +9,8 @@ class UserMapper {
       login: user.login,
       name: user.name,
       publicRepos: user.publicRepos,
+      location: user.location,
+      bio: user.bio,
     );
   }
 }
