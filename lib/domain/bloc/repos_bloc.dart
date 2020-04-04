@@ -37,9 +37,9 @@ class ReposInitState extends ReposState {}
 class ReposLoadingState extends ReposState {}
 
 class ReposReadyState extends ReposState {
-  final List<Repository> user;
+  final List<Repository> repos;
 
-  ReposReadyState(this.user);
+  ReposReadyState(this.repos);
 }
 
 class ReposErrorState extends ReposState {

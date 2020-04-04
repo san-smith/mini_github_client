@@ -11,7 +11,7 @@ class ApiRepository {
 
   ApiRepository.fromMap(Map<String, dynamic> map)
       : name = map[_NAME],
-        description = map[_DESCRIPTION],
+        description = map[_DESCRIPTION] ?? '',
         language = map[_LANGUAGE],
         stargazersCount = map[_STARGAZERS_COUNT];
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_github_client/domain/bloc/user_bloc.dart';
 import 'package:mini_github_client/domain/model/user.dart';
 import 'package:mini_github_client/internal/dependencies/user_module.dart';
+import 'package:mini_github_client/presentation/repositories/repositories.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -126,16 +127,16 @@ class _HomeState extends State<Home> {
         if (user.bio.isNotEmpty) ...[
           SizedBox(height: 15),
           Text(
-          user.bio,
-          style: TextStyle(
-            fontSize: 14,
+            user.bio,
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
-        ),
         ],
         SizedBox(height: 15),
         RaisedButton(
           child: Text('Репозитории (${user.publicRepos})'),
-          onPressed: _goToRepos,
+          onPressed: () => _goToRepos(user),
         ),
       ],
     );
@@ -148,5 +149,12 @@ class _HomeState extends State<Home> {
     }
   }
 
-  void _goToRepos() {}
+  void _goToRepos(User user) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Repositories(user),
+      ),
+    );
+  }
 }
