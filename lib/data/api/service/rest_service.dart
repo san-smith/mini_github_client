@@ -1,10 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:mini_github_client/data/api/model/api_commit.dart';
 import 'package:mini_github_client/data/api/model/api_repository.dart';
 import 'package:mini_github_client/data/api/model/api_user.dart';
 
 class Route {
   static String _getUser(String login) => '/users/$login';
   static String _getRepos(String login) => '/users/$login/repos';
+  static String _getCommits(String login, String repo) =>
+      '/users/$login/$repo/commits';
 }
 
 class RestService {
@@ -51,6 +54,15 @@ class RestService {
     );
     return List.of(response.data)
         .map((item) => ApiRepository.fromMap(item))
+        .toList();
+  }
+
+  Future<List<ApiCommit>> getCommits(String login, String repo) async {
+    final response = await _get(
+      Route._getCommits(login, repo),
+    );
+    return List.of(response.data)
+        .map((item) => ApiCommit.fromMap(item))
         .toList();
   }
 }
