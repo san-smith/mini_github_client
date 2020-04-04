@@ -21,7 +21,7 @@ class ApiUtil {
     return repos.map((item) => RepositoryMapper.fromApi(item)).toList();
   }
 
-  Future<List<Commit>> getComits(String login, String repo) async {
+  Future<List<Commit>> getCommits(String login, String repo) async {
     final repos = await _restService.getCommits(login, repo);
     return repos.map((item) => CommitMapper.fromApi(item)).toList();
   }
