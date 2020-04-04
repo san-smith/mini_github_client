@@ -12,7 +12,7 @@ class CommitsBloc extends Bloc<CommitsEvent, CommitsState> {
 
   @override
   Stream<CommitsState> mapEventToState(CommitsEvent event) async* {
-    if (event is ReposGetEvent) {
+    if (event is CommitsGetEvent) {
       yield* _getCommitsToState(event.login, event.repo);
     }
   }
@@ -52,9 +52,9 @@ class CommitsErrorState extends CommitsState {
 
 abstract class CommitsEvent {}
 
-class ReposGetEvent extends CommitsEvent {
+class CommitsGetEvent extends CommitsEvent {
   final String login;
   final String repo;
 
-  ReposGetEvent(this.login, this.repo);
+  CommitsGetEvent(this.login, this.repo);
 }

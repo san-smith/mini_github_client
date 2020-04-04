@@ -7,7 +7,7 @@ class Route {
   static String _getUser(String login) => '/users/$login';
   static String _getRepos(String login) => '/users/$login/repos';
   static String _getCommits(String login, String repo) =>
-      '/users/$login/$repo/commits';
+      '/repos/$login/$repo/commits';
 }
 
 class RestService {

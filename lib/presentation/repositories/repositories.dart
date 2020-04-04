@@ -4,6 +4,7 @@ import 'package:mini_github_client/domain/bloc/repos_bloc.dart';
 import 'package:mini_github_client/domain/model/repository.dart';
 import 'package:mini_github_client/domain/model/user.dart';
 import 'package:mini_github_client/internal/dependencies/user_module.dart';
+import 'package:mini_github_client/presentation/repo_info/repo_info.dart';
 
 class Repositories extends StatefulWidget {
   final User user;
@@ -72,14 +73,17 @@ class _RepositoriesState extends State<Repositories> {
 
   Widget _getItem(Repository repo) {
     return Card(
-      child: Row(
-        children: <Widget>[
-          _getUserInfo(),
-          Expanded(
-            child: _getRepoInfo(repo),
-          ),
-          _getRepoStars(repo.stargazersCount),
-        ],
+      child: InkWell(
+        onTap: () => _goToRepoDetails(repo.name),
+        child: Row(
+          children: <Widget>[
+            _getUserInfo(),
+            Expanded(
+              child: _getRepoInfo(repo),
+            ),
+            _getRepoStars(repo.stargazersCount),
+          ],
+        ),
       ),
     );
   }
@@ -135,6 +139,15 @@ class _RepositoriesState extends State<Repositories> {
           overflow: TextOverflow.ellipsis,
         ),
       ],
+    );
+  }
+
+  void _goToRepoDetails(String repo) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RepoInfo(widget.user.login, repo),
+      ),
     );
   }
 }
