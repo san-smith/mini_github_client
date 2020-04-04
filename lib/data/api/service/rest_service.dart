@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:mini_github_client/data/api/model/api_repository.dart';
 import 'package:mini_github_client/data/api/model/api_user.dart';
 
 class Route {
-  static String _getUser(String name) => '/users/$name';
+  static String _getUser(String login) => '/users/$login';
+  static String _getRepos(String login) => '/users/$login/repos';
 }
 
 class RestService {
@@ -41,5 +43,14 @@ class RestService {
       Route._getUser(login),
     );
     return ApiUser.fromMap(response.data);
+  }
+
+  Future<List<ApiRepository>> getRepos(String login) async {
+    final response = await _get(
+      Route._getRepos(login),
+    );
+    return List.of(response.data)
+        .map((item) => ApiRepository.fromMap(item))
+        .toList();
   }
 }
